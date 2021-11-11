@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Student = require('./student-schema')
+const Student = require('./student-model')
 require('dotenv').config()
 mongoose.connect(process.env.DATABASE).then(() => {console.log('DB connected')})
 
