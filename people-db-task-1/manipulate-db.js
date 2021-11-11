@@ -19,13 +19,26 @@ async function getStudentsWithcourse(course, gender){
     students.forEach( student => {
         if (student.courses.incluses(course)){
             if (gender) {
-                if (student.gender === gender){
-                    studentsWithCourse.push(student)
-                }
+                if (student.gender === gender) studentsWithCourse.push(student)
             } else {
                 studentsWithCourse.push(student)
             }
         }
     })
     return studentsWithCourse
+}
+
+async function getStudentsByBirth(birthStr){
+    const birth = new Date(birthStr)
+    const studentsByBirth = await Student.find({birth})
+    return studentsByBirth
+}
+
+async function getStudentsByPhone(query){
+    const studentsFound = []
+    const students = await Student.find({})
+    students.forEach(student => {
+        if (student.phone.startsWith(query)) studentsFound.push(student)
+    })
+    return studentsFound
 }
