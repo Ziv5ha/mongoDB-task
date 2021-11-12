@@ -34,9 +34,9 @@ require('dotenv').config()
 mongoose.connect(process.env.DATABASE).then(() => {console.log('DB connected')})
 
 async function processDataAndUpload(rawData){
-    const commentsData = rawData.map(async comment => {
+    rawData.map(async comment => {
         const post = await Post.findOne({title: comment.post})
-        comment.post =  post._id
+        comment.post =  post._id.toString()
         const commentData = new Comment({
             username: comment.username,
             comment : comment.comment,
